@@ -1,0 +1,59 @@
+-- Get all pizza order details
+SELECT
+  [order_id],
+  [order_details_id],
+  [pizza_id],
+  [quantity]
+FROM
+  [spr_2023].[dbo].[pizza_order_details];
+
+-- Get all pizza order data
+SELECT
+  [order_id],
+  [date],
+  [time]
+FROM
+  [spr_2023].[dbo].[pizza_orders];
+
+-- Get all Pizza order prices
+SELECT
+  [pizza_id],
+  [pizza_type_id],
+  [size],
+  [price]
+FROM
+  [spr_2023].[dbo].[pizza_prices];
+
+-- Get all pizza types data
+SELECT
+  [pizza_type_id],
+  [name],
+  [category],
+  [ingredients]
+FROM
+  [spr_2023].[dbo].[pizza_types];
+
+SELECT
+  od.order_id,
+  od.order_details_id,
+  od.pizza_id,
+  od.quantity,
+  o.date,
+  o.time,
+  pp.pizza_id,
+  pp.pizza_type_id,
+  pp.size,
+  pp.price,
+  pt.pizza_type_id,
+  pt.name,
+  pt.category,
+  pt.ingredients
+FROM
+  [spr_2023].[dbo].[pizza_order_details] od
+JOIN
+  [spr_2023].[dbo].[pizza_orders] o ON od.order_id = o.order_id
+JOIN
+  [spr_2023].[dbo].[pizza_prices] pp ON od.pizza_id = pp.pizza_id
+JOIN
+  [spr_2023].[dbo].[pizza_types] pt ON pp.pizza_type_id = pt.pizza_type_id;
+  
